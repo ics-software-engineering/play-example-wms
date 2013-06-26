@@ -8,3 +8,4 @@ A simple Play Framework application illustrating:
   * Simple controller development with tests
   * Simple view development with tests (and the Page Object Pattern in Fluentlenium)
   * Use of DivShot to prototype user interface.
+  * Now built with cloudbees.
