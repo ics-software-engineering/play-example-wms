@@ -9,3 +9,5 @@ A simple Play Framework application illustrating:
   * Simple view development with tests (and the Page Object Pattern in Fluentlenium)
   * Use of DivShot to prototype user interface.
   * Now built with cloudbees.
+  
+[![Build Status](https://philipmjohnson.ci.cloudbees.com/buildStatus/icon?job=play-example-wms2)](https://philipmjohnson.ci.cloudbees.com/job/play-example-wms2/)
