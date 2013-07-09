@@ -10,4 +10,6 @@ A simple Play Framework application illustrating:
   * Use of DivShot to prototype user interface.
   * Now built with cloudbees.
   
-[![Build Status](https://philipmjohnson.ci.cloudbees.com/buildStatus/icon?job=play-example-wms2)](https://philipmjohnson.ci.cloudbees.com/job/play-example-wms2/)
+  
+[![Build Status](https://philipmjohnson.ci.cloudbees.com/buildStatus/icon?job=play-example-wms)](https://philipmjohnson.ci.cloudbees.com/job/play-example-wms/)  
+

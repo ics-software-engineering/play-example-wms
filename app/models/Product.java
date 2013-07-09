@@ -21,34 +21,35 @@ public class Product extends Model {
   @Required
   public String name;
   public String description;
-  @Transient 
+  @Transient
   public String stockItemList = "";
-  @ManyToMany(cascade=CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   public List<Tag> tags = new ArrayList<>();
-  @OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
   public List<StockItem> stockitems = new ArrayList<>();
-  
+
   public Product(String productId, String name, String description) {
     this.productId = productId;
     this.name = name;
     this.description = description;
   }
-  
+
   public static Finder<Long, Product> find() {
     return new Finder<Long, Product>(Long.class, Product.class);
   }
-  
+
+  @Override
   public String toString() {
     return String.format("[Product %s %s %s]", productId, name, description);
   }
-  
+
   public void setStockItemList() {
     stockItemList = "";
     for (StockItem item : stockitems) {
-        stockItemList +=  item.stockItemId + "\n";
+      stockItemList += item.stockItemId + "\n";
     }
   }
-  
+
   public static List<String> getNames() {
     List<String> productNames = new ArrayList<>();
     for (Product product : find().all()) {
@@ -56,6 +57,5 @@ public class Product extends Model {
     }
     return productNames;
   }
-  
 
 }
