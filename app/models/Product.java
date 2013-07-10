@@ -37,7 +37,7 @@ public class Product extends Model {
    * @param name The name.
    * @param description The description.
    */
-  public Product(final String productId, final String name, final String description) {
+  public Product(String productId, String name, String description) {
     this.setProductId(productId);
     this.setName(name);
     this.setDescription(description);
@@ -52,14 +52,14 @@ public class Product extends Model {
   }
 
   @Override
-  public final String toString() {
+  public String toString() {
     return String.format("[Product %s %s %s]", getProductId(), getName(), getDescription());
   }
 
   /**
    * Sets the stockItemList string by retrieving the current set of stock items.
    */
-  public final void setStockItemList() {
+  public void setStockItemList() {
     stockItemList = "";
     for (StockItem item : getStockitems()) {
       stockItemList += item.getStockItemId() + "\n";
@@ -81,98 +81,98 @@ public class Product extends Model {
   /**
    * @return the primaryKey
    */
-  public final Long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return primaryKey;
   }
 
   /**
    * @param primaryKey the primaryKey to set
    */
-  public final void setPrimaryKey(final Long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
 
   /**
    * @return the productId
    */
-  public final String getProductId() {
+  public String getProductId() {
     return productId;
   }
 
   /**
    * @param productId the productId to set
    */
-  public final void setProductId(final String productId) {
+  public void setProductId(String productId) {
     this.productId = productId;
   }
 
   /**
    * @return the name
    */
-  public final String getName() {
+  public String getName() {
     return name;
   }
 
   /**
    * @param name the name to set
    */
-  public final void setName(final String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
   /**
    * @return the description
    */
-  public final String getDescription() {
+  public String getDescription() {
     return description;
   }
 
   /**
    * @param description the description to set
    */
-  public final void setDescription(final String description) {
+  public void setDescription(String description) {
     this.description = description;
   }
 
   /**
    * @return the stockItemList
    */
-  public final String getStockItemList() {
+  public String getStockItemList() {
     return stockItemList;
   }
 
   /**
    * @param stockItemList the stockItemList to set
    */
-  public final void setStockItemList(final String stockItemList) {
+  public void setStockItemList(String stockItemList) {
     this.stockItemList = stockItemList;
   }
 
   /**
    * @return the tags
    */
-  public final List<Tag> getTags() {
+  public List<Tag> getTags() {
     return tags;
   }
 
   /**
    * @param tags the tags to set
    */
-  public final void setTags(final List<Tag> tags) {
+  public void setTags(List<Tag> tags) {
     this.tags = tags;
   }
 
   /**
    * @return the stockitems
    */
-  public final List<StockItem> getStockitems() {
+  public List<StockItem> getStockitems() {
     return stockitems;
   }
 
   /**
    * @param stockitems the stockitems to set
    */
-  public final void setStockitems(final List<StockItem> stockitems) {
+  public void setStockitems(List<StockItem> stockitems) {
     this.stockitems = stockitems;
   }
 

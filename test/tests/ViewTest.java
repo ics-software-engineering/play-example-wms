@@ -1,18 +1,19 @@
+package tests;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.running;
 import static play.test.Helpers.testServer;
 import org.junit.Test;
-import pages.ProductCreatePage;
-import pages.ProductEditPage;
-import pages.StockItemCreatePage;
-import pages.StockItemEditPage;
-import pages.WarehouseEditPage;
-import pages.IndexPage;
-import pages.WarehouseCreatePage;
 import play.libs.F.Callback;
 import play.test.TestBrowser;
+import tests.pages.IndexPage;
+import tests.pages.ProductCreatePage;
+import tests.pages.ProductEditPage;
+import tests.pages.StockItemCreatePage;
+import tests.pages.StockItemEditPage;
+import tests.pages.WarehouseCreatePage;
+import tests.pages.WarehouseEditPage;
 import static org.fest.assertions.Assertions.assertThat;
 
 

@@ -25,7 +25,7 @@ public class Tag extends Controller {
    * @param tagId The tag ID.
    * @return The tag name.
    */
-  public static Result details(final String tagId) {
+  public static Result details(String tagId) {
     models.Tag tag = models.Tag.find().where().eq("tagId", tagId).findUnique();
     return (tag == null) ? notFound("No Tag found") : ok(tag.toString());
   }
@@ -52,7 +52,7 @@ public class Tag extends Controller {
    * @param tagId The tag ID.
    * @return OK.
    */
-  public static Result delete(final String tagId) {
+  public static Result delete(String tagId) {
     models.Tag tag = models.Tag.find().where().eq("tagId", tagId).findUnique();
     if (tag != null) {
       tag.delete();

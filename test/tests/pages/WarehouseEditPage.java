@@ -1,4 +1,4 @@
-package pages;
+package tests.pages;
 
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;

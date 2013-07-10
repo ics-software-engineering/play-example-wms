@@ -43,7 +43,7 @@ public class StockItem extends Controller {
    * @param primaryKey The PK used to retrieve the stockItem.
    * @return An filled stockItem form.
    */
-  public static Result edit(final Long primaryKey) {
+  public static Result edit(Long primaryKey) {
     models.StockItem stockItem = models.StockItem.find().byId(primaryKey);
     Form<models.StockItem> stockItemForm = form(models.StockItem.class).fill(stockItem);
     return ok(stockitemEdit.render(primaryKey, stockItemForm));
@@ -55,7 +55,7 @@ public class StockItem extends Controller {
    * @param primaryKey The PK to the stockItem.
    * @return The home page.
    */
-  public static Result update(final Long primaryKey) {
+  public static Result update(Long primaryKey) {
     Form<models.StockItem> stockItemForm = form(models.StockItem.class).bindFromRequest();
     if (stockItemForm.hasErrors()) {
       return badRequest(stockitemEdit.render(primaryKey, stockItemForm));
@@ -69,7 +69,7 @@ public class StockItem extends Controller {
    * @param primaryKey The PK to the stockItem to be deleted.
    * @return The home page.
    */
-  public static Result delete(final Long primaryKey) {
+  public static Result delete(Long primaryKey) {
     models.StockItem.find().byId(primaryKey).delete();
     return redirect(routes.Application.index());
   }

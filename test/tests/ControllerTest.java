@@ -1,3 +1,4 @@
+package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static play.mvc.Http.Status.BAD_REQUEST;

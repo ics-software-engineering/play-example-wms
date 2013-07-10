@@ -1,3 +1,4 @@
+package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
@@ -35,12 +36,12 @@ public class ModelTest {
     Tag tag = new Tag("Tag");
     Product product = new Product("P-01", "French Press", "Coffee Maker");
     product.getTags().add(tag);
-    tag.products.add(product);
+    tag.getProducts().add(product);
     
     // Create 1 warehouse that's associated with 1 StockItem for 1 Product
     Warehouse warehouse = new Warehouse("W-01", "Honolulu Warehouse", "Honolulu", "HI", "96822");
     StockItem stockitem = new StockItem(warehouse, product, 100);
-    warehouse.stockitems.add(stockitem);
+    warehouse.getStockItems().add(stockitem);
     stockitem.setWarehouse(warehouse);
 
     // Persist the sample model by saving all entities and relationships.
@@ -62,12 +63,12 @@ public class ModelTest {
     assertEquals("Checking stockitems", stockitems.size(), 1);  
     
     // Check that we've recovered all relationships
-    assertEquals("Warehouse-StockItem", warehouses.get(0).stockitems.get(0), stockitems.get(0));
+    assertEquals("Warehouse-StockItem", warehouses.get(0).getStockItems().get(0), stockitems.get(0));
     assertEquals("StockItem-Warehouse", stockitems.get(0).getWarehouse(), warehouses.get(0));
     assertEquals("Product-StockItem", products.get(0).getStockitems().get(0), stockitems.get(0));
     assertEquals("StockItem-Product", stockitems.get(0).getProduct(), products.get(0));
     assertEquals("Product-Tag", products.get(0).getTags().get(0), tags.get(0));
-    assertEquals("Tag-Product", tags.get(0).products.get(0), products.get(0));
+    assertEquals("Tag-Product", tags.get(0).getProducts().get(0), products.get(0));
 
     
     // Some code to illustrate model manipulation with ORM.
@@ -80,7 +81,7 @@ public class ModelTest {
     // But of course it does change a freshly retrieved product instance.
     assertTrue("Fresh Product has no tag", Product.find().findList().get(0).getTags().isEmpty());
     // Note: Freshly retrieved Tag does not point to any Product.
-    assertTrue("Fresh Tag has no Products", Tag.find().findList().get(0).products.isEmpty());
+    assertTrue("Fresh Tag has no Products", Tag.find().findList().get(0).getProducts().isEmpty());
     // We can now delete this Tag from the database if we want.
     tag.delete();
     assertTrue("No more tags in database", Tag.find().findList().isEmpty());

@@ -42,7 +42,7 @@ public class Product extends Controller {
    * @param primaryKey The PK used to retrieve the product.
    * @return An filled product form.
    */
-  public static Result edit(final Long primaryKey) {
+  public static Result edit(Long primaryKey) {
     models.Product product = models.Product.find().byId(primaryKey);
     product.setStockItemList();
     Form<models.Product> productForm = form(models.Product.class).fill(product);
@@ -55,7 +55,7 @@ public class Product extends Controller {
    * @param primaryKey The PK to the product.
    * @return The home page.
    */
-  public static Result update(final Long primaryKey) {
+  public static Result update(Long primaryKey) {
     Form<models.Product> productForm = form(models.Product.class).bindFromRequest();
     if (productForm.hasErrors()) {
       return badRequest(productEdit.render(primaryKey, productForm));
@@ -69,7 +69,7 @@ public class Product extends Controller {
    * @param primaryKey The PK to the product to be deleted.
    * @return The home page.
    */
-  public static Result delete(final Long primaryKey) {
+  public static Result delete(Long primaryKey) {
     models.Product.find().byId(primaryKey).delete();
     return redirect(routes.Application.index());
   }

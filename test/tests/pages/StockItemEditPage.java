@@ -1,4 +1,4 @@
-package pages;
+package tests.pages;
 
 import static org.fluentlenium.core.filter.FilterConstructor.withId;
 import static org.fluentlenium.core.filter.FilterConstructor.withText;

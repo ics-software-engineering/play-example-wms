@@ -12,7 +12,7 @@
           <table class="table table-condensed">
             <tbody>
               @for(warehouse <- warehouses) {
-                <tr><td><a href="@routes.Warehouse.edit(warehouse.primaryKey)">@warehouse.name (@warehouse.warehouseId)</a></td></tr>
+                <tr><td><a href="@routes.Warehouse.edit(warehouse.getPrimaryKey())">@warehouse.getName() (@warehouse.getWarehouseId())</a></td></tr>
               }
             </tbody>
           </table>
