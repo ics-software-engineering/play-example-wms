@@ -41,7 +41,7 @@ public class ModelTest {
     Warehouse warehouse = new Warehouse("W-01", "Honolulu Warehouse", "Honolulu", "HI", "96822");
     StockItem stockitem = new StockItem(warehouse, product, 100);
     warehouse.stockitems.add(stockitem);
-    stockitem.warehouse = warehouse;
+    stockitem.setWarehouse(warehouse);
 
     // Persist the sample model by saving all entities and relationships.
     warehouse.save();
@@ -63,9 +63,9 @@ public class ModelTest {
     
     // Check that we've recovered all relationships
     assertEquals("Warehouse-StockItem", warehouses.get(0).stockitems.get(0), stockitems.get(0));
-    assertEquals("StockItem-Warehouse", stockitems.get(0).warehouse, warehouses.get(0));
+    assertEquals("StockItem-Warehouse", stockitems.get(0).getWarehouse(), warehouses.get(0));
     assertEquals("Product-StockItem", products.get(0).getStockitems().get(0), stockitems.get(0));
-    assertEquals("StockItem-Product", stockitems.get(0).product, products.get(0));
+    assertEquals("StockItem-Product", stockitems.get(0).getProduct(), products.get(0));
     assertEquals("Product-Tag", products.get(0).getTags().get(0), tags.get(0));
     assertEquals("Tag-Product", tags.get(0).products.get(0), products.get(0));
 

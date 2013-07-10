@@ -62,7 +62,7 @@ public class Product extends Model {
   public final void setStockItemList() {
     stockItemList = "";
     for (StockItem item : getStockitems()) {
-      stockItemList += item.stockItemId + "\n";
+      stockItemList += item.getStockItemId() + "\n";
     }
   }
 

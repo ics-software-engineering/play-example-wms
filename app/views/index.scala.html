@@ -48,7 +48,7 @@
           <table class="table table-condensed">
             <tbody>
               @for(stockItem <- stockItems) {
-                <tr><td><a href="@routes.StockItem.edit(stockItem.primaryKey)">@stockItem.product.getName() (@stockItem.stockItemId)</a></td></tr>
+                <tr><td><a href="@routes.StockItem.edit(stockItem.getPrimaryKey())">@stockItem.getProduct().getName() (@stockItem.getStockItemId())</a></td></tr>
               }
             </tbody>
           </table>
