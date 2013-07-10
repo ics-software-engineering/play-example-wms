@@ -18,7 +18,7 @@
           </table>
         </div>
         <div class="pad-top">
-          <a id="newWarehouse" href="@routes.Warehouse.create()" class="btn btn-block btn-success">New Warehouse</a> 
+          <a id="newWarehouse" href="@routes.Warehouse.create()" class="btn btn-block btn-success">New Warehouse</a>
         </div>
       </div>
     </div>
@@ -30,13 +30,13 @@
           <table class="table table-condensed">
             <tbody>
               @for(product <- products) {
-                <tr><td><a href="@routes.Product.edit(product.primaryKey)">@product.name (@product.productId)</a></td></tr>
+                <tr><td><a href="@routes.Product.edit(product.getPrimaryKey)">@product.getName() (@product.getProductId())</a></td></tr>
               }
             </tbody>
           </table>
         </div>
         <div class="pad-top">
-          <a id="newProduct" href="@routes.Product.create()" class="btn btn-block btn-success">New Product</a> 
+          <a id="newProduct" href="@routes.Product.create()" class="btn btn-block btn-success">New Product</a>
         </div>
       </div>
     </div>
@@ -48,13 +48,13 @@
           <table class="table table-condensed">
             <tbody>
               @for(stockItem <- stockItems) {
-                <tr><td><a href="@routes.StockItem.edit(stockItem.primaryKey)">@stockItem.product.name (@stockItem.stockItemId)</a></td></tr>
+                <tr><td><a href="@routes.StockItem.edit(stockItem.primaryKey)">@stockItem.product.getName() (@stockItem.stockItemId)</a></td></tr>
               }
             </tbody>
           </table>
         </div>
         <div class="pad-top">
-          <a href="@routes.StockItem.create()" class="btn btn-block btn-success">New Stock Item</a> 
+          <a href="@routes.StockItem.create()" class="btn btn-block btn-success">New Stock Item</a>
         </div>
       </div>
     </div>
