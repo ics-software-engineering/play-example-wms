@@ -25,7 +25,7 @@ public class Tag extends Model {
    * @param tagId The tagId.
    */
   public Tag(String tagId) {
-    this.setTagId(tagId);
+    this.tagId = tagId;
   }
 
   /**

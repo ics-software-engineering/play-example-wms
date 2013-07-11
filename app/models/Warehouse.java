@@ -40,11 +40,11 @@ public class Warehouse extends Model {
    * @param zip The zip code.
    */
   public Warehouse(String warehouseId, String name, String city, String state, String zip) {
-    this.setWarehouseId(warehouseId);
-    this.setName(name);
-    this.setCity(city);
-    this.setState(state);
-    this.setZip(zip);
+    this.warehouseId = warehouseId;
+    this.name = name;
+    this.city = city;
+    this.state = state;
+    this.zip = zip;
   }
 
   /**

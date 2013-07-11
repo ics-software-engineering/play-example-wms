@@ -36,9 +36,9 @@ public class StockItem extends Model {
    * @param quantity The quantity.
    */
   public StockItem(Warehouse warehouse, Product product, long quantity) {
-    this.setWarehouse(warehouse);
-    this.setProduct(product);
-    this.setQuantity(quantity);
+    this.warehouse = warehouse;
+    this.product = product;
+    this.quantity = quantity;
   }
 
   /**
@@ -47,8 +47,8 @@ public class StockItem extends Model {
    * @param quantity The default quantity
    */
   public StockItem(String stockItemId, int quantity) {
-    this.setStockItemId(stockItemId);
-    this.setQuantity(quantity);
+    this.stockItemId = stockItemId;
+    this.quantity = quantity;
   }
 
   /**
