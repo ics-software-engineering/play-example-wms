@@ -1,4 +1,5 @@
 package tests;
+import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
@@ -14,30 +15,39 @@ import tests.pages.StockItemCreatePage;
 import tests.pages.StockItemEditPage;
 import tests.pages.WarehouseCreatePage;
 import tests.pages.WarehouseEditPage;
-import static org.fest.assertions.Assertions.assertThat;
 
-
+/**
+ * Test the view code.
+ */
 public class ViewTest {
-  
+  private final int testPort = 3333;
+
+  /** Test retrieval of the home page. */
   @Test
-  public void testIndexPage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testIndexPage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         browser.goTo(homePage);
         homePage.isAt();
         homePage.gotoNewWarehouse();
       }
     });
   }
-  
+
+  /** Test creation of a warehouse. */
   @Test
-  public void testWarehouseCreatePage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testWarehouseCreatePage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
-        // Create the pages. 
-        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), 3333); 
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        // Create the pages.
+        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(),
+            testPort);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         // Now test the page.
         browser.goTo(warehousePage);
         warehousePage.isAt();
@@ -48,14 +58,18 @@ public class ViewTest {
       }
     });
   }
-  
+
+  /** Test retrieval and manipulation of the warehouse edit page. */
   @Test
-  public void testWarehouseEditPage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testWarehouseEditPage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
-        // Define the pages. 
-        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), 3333); 
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        // Define the pages.
+        WarehouseCreatePage warehousePage =
+            new WarehouseCreatePage(browser.getDriver(), testPort);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         // Test that we can create a page.
         browser.goTo(warehousePage);
         warehousePage.isAt();
@@ -63,14 +77,14 @@ public class ViewTest {
         warehousePage.makeNewWarehouse(warehouseId);
         homePage.isAt();
         homePage.pageSource().contains(warehouseId);
-        // Test that we can edit a page. 
-        //   We should really get the PK from the home page, not just magically know it. 
-        WarehouseEditPage editPage = new WarehouseEditPage(browser.getDriver(), 3333, 1);
+        // Test that we can edit a page.
+        //   We should really get the PK from the home page, not just magically know it.
+        WarehouseEditPage editPage = new WarehouseEditPage(browser.getDriver(), testPort, 1);
         browser.goTo(editPage);
         String editWarehouseId = "EditedWarehouseId";
         editPage.editWarehouse(editWarehouseId);
         homePage.pageSource().contains(editWarehouseId);
-        // Test that we can delete the page and it will no longer be found on the home page. 
+        // Test that we can delete the page and it will no longer be found on the home page.
         browser.goTo(editPage);
         editPage.deleteWarehouse();
         homePage.isAt();
@@ -78,14 +92,17 @@ public class ViewTest {
       }
     });
   }
-  
+
+  /** Test the product create page. */
   @Test
-  public void testProductCreatePage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testProductCreatePage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
-        // Create the pages. 
-        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), 3333); 
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        // Create the pages.
+        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), testPort);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         // Now test the page.
         browser.goTo(productPage);
         productPage.isAt();
@@ -96,14 +113,17 @@ public class ViewTest {
       }
     });
   }
-  
+
+  /** Test the product edit page. */
   @Test
-  public void testProductEditPage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testProductEditPage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
-        // Define the pages. 
-        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), 3333); 
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        // Define the pages.
+        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), testPort);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         // Test that we can create a page.
         browser.goTo(productPage);
         productPage.isAt();
@@ -111,14 +131,14 @@ public class ViewTest {
         productPage.makeNewProduct(productId);
         homePage.isAt();
         homePage.pageSource().contains(productId);
-        // Test that we can edit a page. 
-        //   We should really get the PK from the home page, not just magically know it. 
-        ProductEditPage editPage = new ProductEditPage(browser.getDriver(), 3333, 1);
+        // Test that we can edit a page.
+        //   We should really get the PK from the home page, not just magically know it.
+        ProductEditPage editPage = new ProductEditPage(browser.getDriver(), testPort, 1);
         browser.goTo(editPage);
         String editProductId = "EditedProductId";
         editPage.editProduct(editProductId);
         homePage.pageSource().contains(editProductId);
-        // Test that we can delete the page and it will no longer be found on the home page. 
+        // Test that we can delete the page and it will no longer be found on the home page.
         browser.goTo(editPage);
         editPage.deleteProduct();
         homePage.isAt();
@@ -127,25 +147,28 @@ public class ViewTest {
     });
   }
 
+  /** Test the StockItem create page. */
   @Test
-  public void testStockItemCreatePage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testStockItemCreatePage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
         // create a reference to the home page.
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
         // Create a product.
-        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), 3333); 
+        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), testPort);
         browser.goTo(productPage);
         String productId = "NewTestProduct";
         productPage.makeNewProduct(productId);
         // Create a warehouse.
-        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), 3333); 
+        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), testPort);
         browser.goTo(warehousePage);
         String warehouseId = "NewTestWarehouse";
         warehousePage.makeNewWarehouse(warehouseId);
         // Now create a StockItem that references the test product and warehouse
         String stockItemId = "SI-01";
-        StockItemCreatePage stockItemPage = new StockItemCreatePage(browser.getDriver(), 3333);
+        StockItemCreatePage stockItemPage = new StockItemCreatePage(browser.getDriver(), testPort);
         browser.goTo(stockItemPage);
         stockItemPage.makeNewStockItem(stockItemId, productId, warehouseId);
         browser.goTo(homePage);
@@ -155,43 +178,46 @@ public class ViewTest {
     });
   }
 
+  /** Test the StockItem edit page. */
   @Test
-  public void testStockItemEditPage () {
-    running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+  public void testStockItemEditPage() {
+    running(testServer(testPort, fakeApplication(inMemoryDatabase())), HTMLUNIT,
+        new Callback<TestBrowser>() {
+      @Override
       public void invoke(TestBrowser browser) {
         // create a reference to the home page.
-        IndexPage homePage = new IndexPage(browser.getDriver(), 3333);
+        IndexPage homePage = new IndexPage(browser.getDriver(), testPort);
 
         // Create a product.
-        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), 3333); 
+        ProductCreatePage productPage = new ProductCreatePage(browser.getDriver(), testPort);
         browser.goTo(productPage);
         String productId = "NewTestProduct";
         productPage.makeNewProduct(productId);
 
         // Create a warehouse.
-        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), 3333); 
+        WarehouseCreatePage warehousePage = new WarehouseCreatePage(browser.getDriver(), testPort);
         browser.goTo(warehousePage);
         String warehouseId = "NewTestWarehouse";
         warehousePage.makeNewWarehouse(warehouseId);
 
         // Now create a StockItem that references the test product and warehouse
         String stockItemId = "SI-01";
-        StockItemCreatePage stockItemPage = new StockItemCreatePage(browser.getDriver(), 3333);
+        StockItemCreatePage stockItemPage = new StockItemCreatePage(browser.getDriver(), testPort);
         browser.goTo(stockItemPage);
-        //Note: stockItemId = stockItemName and productId = productName. 
+        //Note: stockItemId = stockItemName and productId = productName.
         stockItemPage.makeNewStockItem(stockItemId, productId, warehouseId);
         homePage.isAt();
         homePage.pageSource().contains(stockItemId);
-        
+
         // Now we can finally edit it.
-        StockItemEditPage editPage = new StockItemEditPage(browser.getDriver(), 3333, 1);
+        StockItemEditPage editPage = new StockItemEditPage(browser.getDriver(), testPort, 1);
         browser.goTo(editPage);
-        
+
         String editStockItemId = "EditedStockItemId";
-        //Note: stockItemId = stockItemName and productId = productName. 
+        //Note: stockItemId = stockItemName and productId = productName.
         editPage.editStockItem(editStockItemId, productId, warehouseId);
         homePage.pageSource().contains(editStockItemId);
-        // Test that we can delete the page and it will no longer be found on the home page. 
+        // Test that we can delete the page and it will no longer be found on the home page.
         browser.goTo(editPage);
         editPage.deleteStockItem();
         homePage.isAt();

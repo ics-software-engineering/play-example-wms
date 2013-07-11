@@ -1,6 +1,10 @@
 package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.start;
+import static play.test.Helpers.stop;
 import java.util.List;
 import models.Product;
 import models.StockItem;
@@ -10,26 +14,30 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import play.test.FakeApplication;
-import static play.test.Helpers.fakeApplication;
-import static play.test.Helpers.inMemoryDatabase;
-import static play.test.Helpers.start;
-import static play.test.Helpers.stop;
 
-
+/**
+ * Test the models.
+ */
 public class ModelTest {
-  private FakeApplication application; 
-  
-  @Before 
-  public void startApp() { 
-    application = fakeApplication(inMemoryDatabase()); 
-    start(application); 
-  } 
+  private FakeApplication application;
+  private final int defaultNumItems = 100;
 
-  @After 
-  public void stopApp() { 
-    stop(application); 
-  } 
-  
+  /** Start the fake application with an in-memory database. */
+  @Before
+  public void startApp() {
+    application = fakeApplication(inMemoryDatabase());
+    start(application);
+  }
+
+  /** Stop the fake application. */
+  @After
+  public void stopApp() {
+    stop(application);
+  }
+
+  /**
+   * Test simple creation of a tag, warehouse, product, and stockitem instances.
+   */
   @Test
   public void testModel() {
     // Create 1 tag that's associated with 1 product.
@@ -37,10 +45,10 @@ public class ModelTest {
     Product product = new Product("P-01", "French Press", "Coffee Maker");
     product.getTags().add(tag);
     tag.getProducts().add(product);
-    
+
     // Create 1 warehouse that's associated with 1 StockItem for 1 Product
     Warehouse warehouse = new Warehouse("W-01", "Honolulu Warehouse", "Honolulu", "HI", "96822");
-    StockItem stockitem = new StockItem(warehouse, product, 100);
+    StockItem stockitem = new StockItem(warehouse, product, defaultNumItems);
     warehouse.getStockItems().add(stockitem);
     stockitem.setWarehouse(warehouse);
 
@@ -49,28 +57,28 @@ public class ModelTest {
     tag.save();
     product.save();
     stockitem.save();
-    
+
     // Retrieve the entire model from the database.
     List<Warehouse> warehouses = Warehouse.find().findList();
     List<Tag> tags = Tag.find().findList();
     List<Product> products = Product.find().findList();
     List<StockItem> stockitems = StockItem.find().findList();
-    
+
     // Check that we've recovered all our entities.
     assertEquals("Checking warehouse", warehouses.size(), 1);
     assertEquals("Checking tags", tags.size(), 1);
     assertEquals("Checking products", products.size(), 1);
-    assertEquals("Checking stockitems", stockitems.size(), 1);  
-    
+    assertEquals("Checking stockitems", stockitems.size(), 1);
+
     // Check that we've recovered all relationships
-    assertEquals("Warehouse-StockItem", warehouses.get(0).getStockItems().get(0), stockitems.get(0));
+    assertEquals("Warehouse-StockIte", warehouses.get(0).getStockItems().get(0), stockitems.get(0));
     assertEquals("StockItem-Warehouse", stockitems.get(0).getWarehouse(), warehouses.get(0));
     assertEquals("Product-StockItem", products.get(0).getStockitems().get(0), stockitems.get(0));
     assertEquals("StockItem-Product", stockitems.get(0).getProduct(), products.get(0));
     assertEquals("Product-Tag", products.get(0).getTags().get(0), tags.get(0));
     assertEquals("Tag-Product", tags.get(0).getProducts().get(0), products.get(0));
 
-    
+
     // Some code to illustrate model manipulation with ORM.
     // Start in Java. Delete the tag from the (original) product instance.
     product.getTags().clear();

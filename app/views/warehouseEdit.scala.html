@@ -1,7 +1,7 @@
 @(primaryKey: Long, warehouseForm: Form[models.Warehouse])
 
 @import helper._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("WMS: Update Warehouse") {
 
@@ -15,13 +15,13 @@
       @inputText(warehouseForm("state"), '_label -> "State", 'placeholder -> "HI")
       @inputText(warehouseForm("zip"), '_label -> "Zip", 'placeholder -> "96822")
       <div class="control-group">
-        <div class="controls">    
-          <input id="update" type="submit" value="Update" class="btn btn-primary"> 
-          <a id="delete" href="@routes.Warehouse.delete(primaryKey)" class="btn btn-danger">Delete</a>  
-          <a id="cancel" href="@routes.Application.index()" class="btn">Cancel</a> 
+        <div class="controls">
+          <input id="update" type="submit" value="Update" class="btn btn-primary">
+          <a id="delete" href="@routes.Warehouse.delete(primaryKey)" class="btn btn-danger">Delete</a>
+          <a id="cancel" href="@routes.Application.index()" class="btn">Cancel</a>
         </div>
       </div>
     }
   </div>
-</div>  
+</div>
 }

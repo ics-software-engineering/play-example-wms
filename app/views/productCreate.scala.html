@@ -1,7 +1,7 @@
 @(productForm: Form[models.Product])
 
 @import helper._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("WMS: Create Product") {
 
@@ -13,12 +13,12 @@
       @inputText(productForm("name"), '_label -> "Name", 'placeholder -> "Product Name")
       @inputText(productForm("description"), '_label -> "Description", 'placeholder -> "Description")
       <div class="control-group">
-        <div class="controls">    
-          <input id="create" type="submit" value="Create" class="btn btn-primary"> 
-          <a href="@routes.Application.index()" class="btn">Cancel</a> 
+        <div class="controls">
+          <input id="create" type="submit" value="Create" class="btn btn-primary">
+          <a href="@routes.Application.index()" class="btn">Cancel</a>
         </div>
       </div>
     }
   </div>
-</div>  
+</div>
 }

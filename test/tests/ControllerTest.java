@@ -22,26 +22,39 @@ import play.mvc.Result;
 import play.test.FakeApplication;
 import play.test.FakeRequest;
 
-
+/**
+ * Test the controller methods.
+ */
 public class ControllerTest {
-    private FakeApplication application; 
-    
-    @Before 
-    public void startApp() { 
-      application = fakeApplication(inMemoryDatabase()); 
-      start(application); 
-    } 
+    private FakeApplication application;
 
-    @After 
-    public void stopApp() { 
-      stop(application); 
-    } 
-    
+    /**
+     * Start a fake application.
+     */
+    @Before
+    public void startApp() {
+      application = fakeApplication(inMemoryDatabase());
+      start(application);
+    }
+
+    /**
+     * Stop the fake application.
+     */
+    @After
+    public void stopApp() {
+      stop(application);
+    }
+
+    /**
+     * Test the Product controller.
+     */
     @Test
     public void testProductController() {
-
     }
-    
+
+    /**
+     * Test the tag controller.
+     */
     @Test
     public void testTagController() {
       // Test GET /tags on an empty database.
@@ -54,15 +67,15 @@ public class ControllerTest {
       tag.save();
       result = callAction(controllers.routes.ref.Tag.index());
       assertTrue("One tag", contentAsString(result).contains(tagId));
-      
+
       // Test GET /tags/Tag-01
       result = callAction(controllers.routes.ref.Tag.details(tagId));
       assertTrue("Tag detail", contentAsString(result).contains(tagId));
-      
+
       // Test GET /tags/BadTagId and make sure we get a 404
       result = callAction(controllers.routes.ref.Tag.details("BadTagId"));
       assertEquals("Tag detail (bad)", NOT_FOUND, status(result));
-      
+
       // Test POST /tags (with simulated, valid form data).
       Map<String, String> tagData = new HashMap<String, String>();
       tagData.put("tagId", "Tag-02");
@@ -70,7 +83,7 @@ public class ControllerTest {
       request.withFormUrlEncodedBody(tagData);
       result = callAction(controllers.routes.ref.Tag.newTag(), request);
       assertEquals("Create new tag", OK, status(result));
-      
+
       // Test POST /tags (with invalid tag: tags cannot be named "Tag").
       // Illustrates use of validate() method in models.Tag.
       request = fakeRequest();
@@ -78,7 +91,7 @@ public class ControllerTest {
       request.withFormUrlEncodedBody(tagData);
       result = callAction(controllers.routes.ref.Tag.newTag(), request);
       assertEquals("Create bad tag fails", BAD_REQUEST, status(result));
-      
+
       // Test DELETE /tags/Tag-O1 (a valid TagId)
       result = callAction(controllers.routes.ref.Tag.delete(tagId));
       assertEquals("Delete current tag OK", OK, status(result));

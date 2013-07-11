@@ -38,9 +38,9 @@ public class Product extends Model {
    * @param description The description.
    */
   public Product(String productId, String name, String description) {
-    this.setProductId(productId);
-    this.setName(name);
-    this.setDescription(description);
+    this.productId = productId;
+    this.name = name;
+    this.description = description;
   }
 
   /**
