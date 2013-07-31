@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table product (
-  primary_key               bigint not null,
+  primary_key               bigint auto_increment not null,
   product_id                varchar(255),
   name                      varchar(255),
   description               varchar(255),
@@ -12,7 +12,7 @@ create table product (
 ;
 
 create table stock_item (
-  primary_key               bigint not null,
+  primary_key               bigint auto_increment not null,
   stock_item_id             varchar(255),
   warehouse_primary_key     bigint,
   product_primary_key       bigint,
@@ -21,13 +21,13 @@ create table stock_item (
 ;
 
 create table tag (
-  primary_key               bigint not null,
+  primary_key               bigint auto_increment not null,
   tag_id                    varchar(255),
   constraint pk_tag primary key (primary_key))
 ;
 
 create table warehouse (
-  primary_key               bigint not null,
+  primary_key               bigint auto_increment not null,
   warehouse_id              varchar(255),
   name                      varchar(255),
   city                      varchar(255),
@@ -42,14 +42,6 @@ create table product_tag (
   tag_primary_key                bigint not null,
   constraint pk_product_tag primary key (product_primary_key, tag_primary_key))
 ;
-create sequence product_seq;
-
-create sequence stock_item_seq;
-
-create sequence tag_seq;
-
-create sequence warehouse_seq;
-
 alter table stock_item add constraint fk_stock_item_warehouse_1 foreign key (warehouse_primary_key) references warehouse (primary_key) on delete restrict on update restrict;
 create index ix_stock_item_warehouse_1 on stock_item (warehouse_primary_key);
 alter table stock_item add constraint fk_stock_item_product_2 foreign key (product_primary_key) references product (primary_key) on delete restrict on update restrict;
@@ -63,25 +55,17 @@ alter table product_tag add constraint fk_product_tag_tag_02 foreign key (tag_pr
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists product;
+drop table product;
 
-drop table if exists product_tag;
+drop table product_tag;
 
-drop table if exists stock_item;
+drop table stock_item;
 
-drop table if exists tag;
+drop table tag;
 
-drop table if exists warehouse;
+drop table warehouse;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists product_seq;
-
-drop sequence if exists stock_item_seq;
-
-drop sequence if exists tag_seq;
-
-drop sequence if exists warehouse_seq;
+SET FOREIGN_KEY_CHECKS=1;
 

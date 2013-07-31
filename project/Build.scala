@@ -16,6 +16,7 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
+    "mysql" % "mysql-connector-java" % "5.1.21",
     "org.webjars" % "webjars-play" % "2.1.0",
     "org.webjars" % "bootstrap" % "2.3.1"
   )
